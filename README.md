@@ -28,7 +28,7 @@ INSTALLED_APPS += tuple(get_oscar_apps(OSCAR_APP_MODS))
 
 **MIT License**
 
-<pre>Copyright (c) 2011 Caio Ariede and Codasus Technologies.
+<pre>Copyright (c) 2012 Caio Ariede.
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
