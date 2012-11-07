@@ -1,6 +1,8 @@
 **django-oscar-cielo**
 
-Cielo (brazilian payment gateway) module for djagno-oscar.
+Cielo (brazilian payment gateway) module for `django-oscar`
+
+https://github.com/tangentlabs/django-oscar
 
 **Requirements**
 
@@ -15,12 +17,14 @@ Or manually place it on your `PYTHON_PATH`.
 **Configuration**
 
 1. Install and configure `django-oscar`
-2. Create an application to put your customizations
-3. Copy `example/*` to your application's folder
-4. Change the call to `get_oscar_apps` in your settings to something like:
+2. Create an application. This is need to put your customizations on.
+3. Copy all files under `example/` to your custom application's folder
+4. In your settings file, change the call to `get_oscar_apps` to:
 
+````python
     OSCAR_APP_MODS = ('your_custom_app.apps.checkout',)
     INSTALLED_APPS += tuple(get_oscar_apps(OSCAR_APP_MODS))
+````
 
 **MIT License**
 
