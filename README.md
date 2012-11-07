@@ -30,9 +30,9 @@ INSTALLED_APPS += tuple(get_oscar_apps(OSCAR_APP_MODS))
 
 *Descriptions are in portuguese*
 
-`OSCAR_CIELO_NUMERO` - Número de afiliação junto à Cielo (Default: `''`)
-`OSCAR_CIELO_CHAVE` - Chave de acesso (Default: `''`)
-`OSCAR_CIELO_SANDBOX` - Ambiente de desenvolvimento (Default: `True`)
+* `OSCAR_CIELO_NUMERO` - Número de afiliação junto à Cielo (Default: `''`)
+* `OSCAR_CIELO_CHAVE` - Chave de acesso (Default: `''`)
+* `OSCAR_CIELO_SANDBOX` - Ambiente de desenvolvimento (Default: `True`)
 
 **MIT License**
 
