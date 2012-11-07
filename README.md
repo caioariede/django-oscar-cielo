@@ -22,8 +22,8 @@ Or manually place it on your `PYTHON_PATH`.
 4. In your settings file, change the call to `get_oscar_apps` to:
 
 ````python
-    OSCAR_APP_MODS = ('your_custom_app.apps.checkout',)
-    INSTALLED_APPS += tuple(get_oscar_apps(OSCAR_APP_MODS))
+OSCAR_APP_MODS = ('your_custom_app.apps.checkout',)
+INSTALLED_APPS += tuple(get_oscar_apps(OSCAR_APP_MODS))
 ````
 
 **MIT License**
