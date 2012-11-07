@@ -1,0 +1,2 @@
+recursive-include oscar_cielo/templates *.html
+recursive-include oscar_cielo/ *.py

@@ -1,0 +1,47 @@
+{% extends "checkout/checkout.html" %}
+{% load i18n currency_filters %}
+
+{% block title %}
+{% trans "Order preview" %} | {{ block.super }}
+{% endblock %}
+
+{% block checkout-nav %}
+	{% include 'checkout/nav.html' with step=4 %}
+{% endblock %}
+
+{% block place_order %}
+<form method="post" action="{% url checkout:preview %}" id="place-order-form">
+	<input type="hidden" name="action" value="place_order" />
+    {{ cielo_hidden_form }}
+	{% csrf_token %}
+    <div class="form-actions">
+		<button id='place-order' type="submit" class="pull-right btn btn-primary btn-large js-disable-on-click" data-loading-text="{% trans 'Submitting...' %}">{% trans "Place order" %}</button>
+    </div>
+</form>
+{% endblock place_order %}
+
+{% block payment_method %}
+   <div class="span6">
+       <div class="sub-header">
+		   <h2>{% trans "Payment" %}</h2>
+        </div>
+        <div class="well well-success">
+            <h3>{% trans "Payment details" %}</h3>
+            <p><b>{% trans "Card Type" %}</b>: {{ cielo_data_card_type_label }}</p>
+            <p><b>{% trans "Installments" %}:</b> {{ cielo_data_installments }}x {% trans "of" %} {{ cielo_data_installment_value|currency }}</p>
+            <p><b>{% trans "Name on card" %}:</b> {{ cielo_data_holders_name }}</p>
+            <p><b>{% trans "Card number" %}:</b> **** **** **** {{ cielo_data_card_number|slice:"-4:" }}</p>
+            <p><b>{% trans "Expiry Date" %}:</b> {{ cielo_data_expiration|date:"m/y" }}</p>
+            <p><b>{% trans "CVV Number" %}:</b> {{ cielo_data_security_code }}</p>
+            <br>
+            <div class="alert-actions">
+                <form method=POST action="{{ request.path }}">
+                    <input type="hidden" name="action" value="change_details" />
+                    {{ cielo_hidden_form }}
+                    {% csrf_token %}
+                    <button class="btn">{% trans "Change payment details" %}</a>
+                </form>
+            </div>
+        </div>    
+    </div>
+{% endblock %}
