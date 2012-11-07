@@ -27,8 +27,8 @@ class CieloPaymentDetailsMixin(object):
 
     def get_cielo_credentials(self):
         return {
-            'affiliation_id': '1006993069',
-            'api_key': '25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3',
+            'affiliation_id': getattr(settings, 'OSCAR_CIELO_NUMERO', ''),
+            'api_key': getattr(settings, 'OSCAR_CIELO_CHAVE', ''),
         }
 
     def get_cielo_payment_data(self, order_number, total_incl_tax, form_data):
