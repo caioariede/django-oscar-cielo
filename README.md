@@ -18,7 +18,7 @@ Or manually place it on your `PYTHON_PATH`.
 
 1. Install and configure `django-oscar`
 2. Create an application. This is need to put your customizations on.
-3. Copy all files under `example/` to your custom application's folder
+3. Copy all files under `sandbox/` to your custom application's folder
 4. In your settings file, change the call to `get_oscar_apps` to:
 
 ````python
