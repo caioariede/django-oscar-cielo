@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 from django.conf import settings
 
 from oscar.apps.payment.models import SourceType, Source
