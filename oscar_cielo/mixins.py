@@ -7,6 +7,7 @@ from oscar.apps.payment import exceptions
 from cielo import (
     PaymentAttempt,
     GetAuthorizedException,
+    CaptureException,
 )
 
 from .forms import (
@@ -61,25 +62,6 @@ class CieloPaymentDetailsMixin(object):
         total_incl_tax, total_excl_tax = self.get_order_totals(
             self.request.basket)
         return total_incl_tax
-
-    def handle_cielo_payment(self, order_number, total_incl_tax):
-        form = self.get_cielo_form()
-
-        if not form.is_valid():
-            """ Something wrong with the submitted values
-            Maybe some value was changed before submiting
-            """
-            raise
-
-        attempt = PaymentAttempt(**self.get_cielo_payment_data(
-            order_number, total_incl_tax, form.cleaned_data))
-
-        try:
-            attempt.get_authorized()
-        except GetAuthorizedException, e:
-            raise exceptions.UnableToTakePayment(unicode(e))
-        else:
-            attempt.capture()
     
     def get_cielo_form(self):
         order_total = self.get_cielo_order_total()
@@ -181,3 +163,23 @@ class CieloPaymentDetailsMixin(object):
             with success.
             """
             self.preview = self.get_cielo_form().is_valid()
+
+    def capture_cielo_payment(self, order_number, total_incl_tax):
+        form = self.get_cielo_form()
+
+        if not form.is_valid():
+            """ Something wrong with the submitted values
+            Maybe some value was changed before submiting
+            """
+            raise
+
+        attempt = PaymentAttempt(**self.get_cielo_payment_data(
+            order_number, total_incl_tax, form.cleaned_data))
+
+        try:
+            attempt.get_authorized()
+            attempt.capture()
+        except (GetAuthorizedException, CaptureException), e:
+            raise exceptions.UnableToTakePayment(unicode(e))
+
+        return attempt
